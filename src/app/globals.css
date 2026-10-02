@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --font-sans: var(--font-inter);
+  --color-primary: #1e3a8a;
+  --color-primary-light: #2563eb;
+  --color-primary-dark: #1e40af;
+  --color-accent: #0284c7;
+  --color-surface: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-critical: #dc2626;
+  --color-high: #ea580c;
+  --color-medium: #ca8a04;
+  --color-low: #475569;
+  --color-pending: #f59e0b;
+  --color-in-progress: #3b82f6;
+  --color-completed: #16a34a;
+  --color-rejected: #94a3b8;
+
+  /* Glassmorphism token system — tuned so the background image stays visible. */
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-bg-strong: rgba(255, 255, 255, 0.18);
+  --glass-bg-dark: rgba(15, 23, 42, 0.22);
+  --glass-bg-input: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --glass-border-strong: rgba(255, 255, 255, 0.32);
+  --glass-blur: blur(14px);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------------------------------------------------------------------------
+   Global background + overlay.
+   The background image is served from /public/bg.png and applied via the layout
+   component. This CSS ensures the body is transparent so the image shows through.
+   --------------------------------------------------------------------------- */
+
+body {
+  color: var(--color-foreground);
+  background: transparent;
+  min-height: 100vh;
+}
+
+/* Transparent page layer so the background image shows through everywhere. */
+.glass-page {
+  background: transparent !important;
+}
+
+/* Subtle global darkening so text stays readable over any background image. */
+.glass-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.18) 0%,
+      rgba(15, 23, 42, 0.08) 40%,
+      rgba(15, 23, 42, 0.22) 100%
+    );
+}
+
+/* Soft-area glass (cards, panels, sidebar). */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+/* Stronger glass for surfaces that sit in front of busy image areas. */
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-strong);
+}
+
+/* Dark glass for very-heavy image regions (e.g. hero, dense sections). */
+.glass-dark {
+  background: var(--glass-bg-dark);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Input glass: lighter so typed text stays legible. */
+.glass-input {
+  background: var(--glass-bg-input);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Base glass interaction behavior. */
+.glass {
+  box-shadow: var(--glass-shadow);
+}
+
+/* Navbar glass (sticky, close to the image). */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Sidebar glass (fixed panel). */
+.glass-sidebar {
+  background: rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* Modals and overlays sit on top with a strong glass backdrop. */
+.glass-modal {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.glass-modal-backdrop {
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Top accent bar so glass panels still have a subtle frame. */
+.glass-accent {
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+}
+
+/* Strong text that remains readable over a transparent background. */
+.glass-heading {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+glass-label {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.glass-text {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Keep the tiniest interactive hint text readable. */
+.glass-muted {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+::selection {
+  background: rgba(30, 58, 138, 0.45);
+  color: #ffffff;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.42);
+}

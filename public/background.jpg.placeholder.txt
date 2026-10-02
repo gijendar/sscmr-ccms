@@ -1,0 +1,16 @@
+Place your background image at:
+
+  /public/background.jpg
+
+(rename or copy your image to that exact filename)
+
+The app already references /background.jpg as the global background.
+Once that file exists, the glass UI will sit on top of it across every page.
+
+For best results with the glass system:
+- Use an image that is at least 1920x1080px
+- Prefer a darker or more muted image if you want text to stay readable
+- Avoid pure white or extremely bright photos
+
+You can also change the image path in src/app/layout.tsx (GLOBAL_BG_IMAGE_URL)
+and in src/app/page.tsx (hero section) to match a different filename.
